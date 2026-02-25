@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Layout</title>
+<link rel="stylesheet" href="footer.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* HERO SECTION */
+.hero{
+    position:relative;
+    width:100%;
+    height:80px;
+    overflow:hidden;
+    background-color: #111;
+}
+
+/* VIDEO BACKGROUND */
+.hero video{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* DARK OVERLAY */
+.hero::after{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.25);
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* NAVBAR */
+.navbar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+}
+
+/* LOGO */
+.logo img{
+    height:40px;
+}
+
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    gap:40px;
+    font-weight:500;
+    letter-spacing:1px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#fff;
+    font-size:14px;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:#fff;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ICONS */
+.nav-icons{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-icons i{
+    font-size:18px;
+    cursor:pointer;
+    color:#ffffff !important;
+    transition:0.3s;
+}
+
+.nav-icons i:hover{
+    opacity:0.7;
+}
+
+/* MENU TOGGLE (MOBILE) */
+.menu-toggle{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
+
+/* MOBILE MENU */
+.mobile-menu{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:70%;
+    height:100%;
+    background:#000;
+    color:#fff;
+    padding:80px 30px;
+    transition:0.4s ease;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+    z-index:999;
+}
+
+.mobile-menu a{
+    text-decoration:none;
+    color:#fff;
+    font-size:18px;
+}
+
+.mobile-menu.active{
+    right:0;
+}
+
+.mobile-header{
+    position:absolute;
+    top:20px;
+    right:25px;
+}
+
+.mobile-header i{
+    font-size:22px;
+    cursor:pointer;
+    color:#fff;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .hero-content h1{
+        font-size:30px;
+    }
+
+    .hero-content{
+        bottom:15%;
+    }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.user-dropdown {
+    position: absolute;
+    top: 60px; /* adjust based on navbar height */
+    right: 20px;
+    width: 220px;
+    background: #111; /* dark theme */
+    color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    display: none;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-dropdown img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.user-dropdown .user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.user-dropdown .user-email {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.user-dropdown button, .user-dropdown a {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: #111;
+    background: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.user-dropdown button:hover, .user-dropdown a:hover {
+    background: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.cart-section {
+    padding: 40px 20px;
+    background-color: #fff;
+    color: #111;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.cart-section .section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #000;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 15px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.cart-item:hover {
+    background: #e0e0e0;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.cart-item-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.cart-item-info p {
+    margin: 5px 0 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.cart-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.cart-item-actions .qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-item-actions button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.cart-item-actions button:hover {
+    background-color: #444;
+}
+
+.cart-summary {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.cart-item-actions .remove-btn {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.cart-item-actions .remove-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cart-item-info {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .cart-item-actions {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+    .cart-summary {
+        text-align: left;
+    }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+ 
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <!-- LOGO (Replace image) -->
+        <div class="logo">
+            <img src="images/icon.png" alt="logo">
+        </div>
+
+        <!-- CENTER NAV -->
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="">Orders</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policies</a>
+        </div>
+
+        <!-- RIGHT ICONS -->
+     <div class="nav-icons">
+   <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
+  
+    <i class="fa-regular fa-user" id="userIcon"></i>
+    <i class="fa-solid fa-bag-shopping"></i>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</div>
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- User Dropdown -->
+<div id="userDropdown" class="user-dropdown">
+    <!-- Filled dynamically by JS -->
+</div>
+
+
+
+
+
+
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-header">
+        <i class="fa-solid fa-xmark" onclick="toggleMenu()"></i>
+    </div>
+
+                <a href="/">Home</a>
+            <a href="">Orders</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policies</a>
+
+</div>
+
+
+
+
+
+<!-- CART SECTION -->
+<section class="cart-section">
+    <h2 class="section-title">Your Cart</h2>
+    <div class="cart-container" id="cartContainer">
+        <!-- Cart items dynamically loaded here -->
+    </div>
+    <div class="cart-summary" id="cartSummary">
+        <!-- Total items and total price -->
+    </div>
+</section>
+
+
+
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- SakhiMart Club Section -->
+    <div class="footer-club">
+      <img src="images/icon.png" alt="SakhiMart Logo" class="footer-logo">
+      <h2>SAKHIMART CLUB <br> WILL SURPRISE YOU</h2>
+      <p>Benefits and plenty of surprises are waiting for you!<br>Sign up now</p>
+      <a href="#" class="footer-btn">Discover more</a>
+    </div>
+
+    <!-- Footer Columns -->
+    <div class="footer-columns">
+
+      <!-- Support -->
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Chat with us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Exclusive Service -->
+      <div class="footer-col">
+        <h4>Exclusive Service</h4>
+        <ul>
+          <li><a href="#">Check / Return Order</a></li>
+          <li><a href="#">Invite SakhiMart On Wheels</a></li>
+          <li><a href="#">COVID Safety Guidelines</a></li>
+          <li><a href="#">SakhiMart Loyalty</a></li>
+          <li><a href="#">SakhiMart Franchise</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">SakhiMart Worldwide</a></li>
+          <li><a href="#">CSR</a></li>
+          <li><a href="#">Awards & Recognition</a></li>
+          <li><a href="#">Become Our Partner</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <!-- Legals -->
+      <div class="footer-col">
+        <h4>Legals</h4>
+        <ul>
+          <li><a href="#">Terms and Conditions</a></li>
+          <li><a href="#">Press Release</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Whistle Blow Policy</a></li>
+          <li><a href="#">POSH Policy</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Extract of Form 5A (EPFO Code)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Row -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <a href="#"><span>📍</span>Find a Store</a>
+      <a href="#"><span>🌐</span>India | English</a>
+    </div>
+    <div class="footer-bottom-right">
+      <a href="#" class="fab">&#xf09a;</a>
+      <a href="#" class="fab">&#xf16d;</a>
+      <a href="#" class="fab">&#xf16a;</a>
+      <a href="#" class="fab">&#xf0d2;</a>
+      <a href="#" class="fab">&#xf08c;</a>
+      <a href="#" class="fab">&#xf099;</a>
+    </div>
+  </div>
+
+  <p class="footer-copy">© 2026 SakhiMart Brand – SakhiMart India – CIN: L19201WB1931PLC007261</p>
+</footer>
+
+
+
+
+<script>
+
+
+const mobileMenu = document.getElementById("mobileMenu");
+
+function toggleMenu(){
+    mobileMenu.classList.toggle("active");
+}
+
+window.addEventListener("click", function(e){
+    if(!mobileMenu.contains(e.target) && 
+       !e.target.closest(".menu-toggle")){
+        mobileMenu.classList.remove("active");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Toggle dropdown on user icon click
+const userIcon = document.getElementById("userIcon");
+const userDropdown = document.getElementById("userDropdown");
+
+userIcon.addEventListener("click", () => {
+    userDropdown.style.display = userDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown if clicked outside
+window.addEventListener("click", (e) => {
+    if(!userDropdown.contains(e.target) && e.target !== userIcon){
+        userDropdown.style.display = "none";
+    }
+});
+
+// Render user info
+function renderUserDropdown() {
+    const token = localStorage.getItem("token");
+    const name = localStorage.getItem("userName");
+    const email = localStorage.getItem("userEmail");
+
+    if(token && name && email){
+        userDropdown.innerHTML = `
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="DP">
+            <div class="user-name">${name}</div>
+            <div class="user-email">${email}</div>
+            <button onclick="logout()">Logout</button>
+        `;
+    } else {
+        userDropdown.innerHTML = `
+            <div style="text-align:center; margin-bottom:10px;">Not signed in</div>
+            <a href="/login">Sign In</a>
+        `;
+    }
+}
+
+// Logout function
+function logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
+    renderUserDropdown();
+    // Optional: redirect to login page
+    window.location.href = "/login";
+}
+
+// Initial render
+renderUserDropdown();
+
+
+
+
+
+
+
+
+
+
+
+
+function loadCart() {
+    const cartContainer = document.getElementById("cartContainer");
+    const cartSummary = document.getElementById("cartSummary");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cartContainer.innerHTML = "";
+    if(cart.length === 0){
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        cartSummary.innerHTML = "";
+        return;
+    }
+
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+        totalItems += item.qty;
+        totalPrice += item.price * item.qty;
+
+        cartContainer.innerHTML += `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.title}">
+                <div class="cart-item-info">
+                    <h4>${item.title}</h4>
+                    <p>Price: ₹${item.price} × ${item.qty}</p>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="qty-controls">
+                        <button onclick="changeQty(${index}, -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button onclick="changeQty(${index}, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                    <button onclick="orderNow('${item._id}')">Order Now</button>
+                </div>
+            </div>
+        `;
+    });
+
+    cartSummary.innerHTML = `Total Items: ${totalItems} | Total Price: ₹${totalPrice}`;
+}
+
+// Quantity change
+function changeQty(index, delta) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart[index].qty += delta;
+    if(cart[index].qty <= 0) cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Remove item
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+// Dummy order function
+function orderNow(productId) {
+    alert(`Order placed for product ID: ${productId}`);
+}
+
+// Load on page
+loadCart();
+
+// Dummy orderNow function
+function orderNow(productId) {
+    // Get cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Find the item
+    const item = cart.find(i => i._id === productId);
+    if (!item) return alert("Item not found in cart!");
+
+    // Compose message
+    const phoneNumber = "917076119520"; // Replace with your number (India code +91)
+    const totalPrice = item.price * item.qty;
+
+    const message = 
+`Hi, I want to order this product:
+*Product:* ${item.title}
+*Quantity:* ${item.qty}
+*Unit Price:* ₹${item.price}
+*Price:* ₹${totalPrice}`;
+
+    // Encode message for URL
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp in new tab/app
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>

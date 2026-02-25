@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Layout</title>
+<link rel="stylesheet" href="footer.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* HERO SECTION */
+.hero{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* VIDEO BACKGROUND */
+.hero video{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* DARK OVERLAY */
+.hero::after{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.25);
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* NAVBAR */
+.navbar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:#fff;
+}
+
+/* LOGO */
+.logo img{
+    height:40px;
+}
+
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    gap:40px;
+    font-weight:500;
+    letter-spacing:1px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#fff;
+    font-size:14px;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:#fff;
+    transition:0.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+/* ICONS */
+.nav-icons{
+    display:flex;
+    gap:25px;
+    align-items:center;
+}
+
+.nav-icons i{
+    font-size:18px;
+    cursor:pointer;
+    color:#ffffff !important;
+    transition:0.3s;
+}
+
+.nav-icons i:hover{
+    opacity:0.7;
+}
+
+/* MENU TOGGLE (MOBILE) */
+.menu-toggle{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* HERO TEXT */
+.hero-content{
+    position:absolute;
+    left:5%;
+    bottom:20%;
+    color:#fff;
+    max-width:600px;
+}
+
+.hero-content h4{
+    font-weight:300;
+    margin-bottom:15px;
+}
+
+.hero-content h1{
+    font-size:42px;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.hero-content p{
+    font-size:16px;
+    opacity:0.9;
+}
+
+/* MOBILE MENU */
+.mobile-menu{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:70%;
+    height:100%;
+    background:#000;
+    color:#fff;
+    padding:80px 30px;
+    transition:0.4s ease;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+    z-index:999;
+}
+
+.mobile-menu a{
+    text-decoration:none;
+    color:#fff;
+    font-size:18px;
+}
+
+.mobile-menu.active{
+    right:0;
+}
+
+.mobile-header{
+    position:absolute;
+    top:20px;
+    right:25px;
+}
+
+.mobile-header i{
+    font-size:22px;
+    cursor:pointer;
+    color:#fff;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .hero-content h1{
+        font-size:30px;
+    }
+
+    .hero-content{
+        bottom:15%;
+    }
+  
+}
+
+
+
+
+
+
+
+/*All Products*/
+
+/* PRODUCTS SECTION */
+.products{
+    padding:10px 5%;
+    background:#ffffff;
+}
+
+.section-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:500;
+    margin-bottom:50px;
+}
+
+/* FLEX CONTAINER */
+.product-container{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* PRODUCT CARD */
+.product-card{
+    width:250px;
+    background:#fff;
+    border:1px solid #eee;
+    padding:20px;
+    text-align:center;
+    transition:0.3s ease;
+}
+
+.product-card:hover{
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    transform:translateY(-5px);
+}
+
+/* IMAGE WRAPPER */
+.product-img{
+    width:100%;
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-img img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;   /* Full image visible */
+}
+
+/* TEXT */
+.product-card h3{
+    font-size:16px;
+    font-weight:500;
+    margin:15px 0 8px;
+}
+
+.price{
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+/* BUTTONS */
+.product-buttons{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+}
+
+.cart-btn{
+    padding:8px 12px;
+    border:1px solid #000;
+    background:#fff;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.cart-btn:hover{
+    background:#000;
+    color:#fff;
+}
+
+.buy-btn{
+    padding:8px 12px;
+    border:none;
+    background:#000;
+    color:#fff;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.buy-btn:hover{
+    opacity:0.8;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .product-card{
+        width:45%;
+    }
+}
+
+@media(max-width:480px){
+    .product-card{
+        width:100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* SECTION BACKGROUND */
+/* HIDDEN STATE */
+.category-section{
+    background:#ffffff;
+    padding:60px 5%;
+    transform:translateY(0);
+    opacity:1;
+  max-height:2000px;
+    overflow:hidden;
+    transition:all 0.6s ease;
+}
+
+/* ACTIVE STATE */
+.category-section.active{
+    transform:translateY(0);
+    opacity:1;
+    max-height:2000px;
+}
+/* SEARCH */
+.category-search{
+    max-width:700px;
+    margin:0 auto 50px;
+    background:#fff;
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    padding:12px 25px;
+    border:1px solid #ddd;
+}
+
+.category-search i{
+    font-size:14px;
+    color:#777;
+    margin-right:10px;
+}
+
+.category-search input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:14px;
+    background:transparent;
+}
+
+/* GRID */
+.category-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:40px 60px;
+}
+
+/* ITEM */
+.category-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    text-decoration:none;
+    color:#111;
+    font-size:14px;   /* small font */
+    font-weight:400;
+    transition:0.3s ease;
+}
+
+.category-item img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+}
+
+.category-item:hover{
+    opacity:0.6;
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .category-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width:768px){
+    .category-grid{
+        grid-template-columns: repeat(2, 1fr);
+        gap:30px;
+    }
+}
+
+@media(max-width:480px){
+    .category-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .category-item{
+        font-size:13px;
+    }
+}
+
+
+
+
+
+
+
+
+/* ================= CATEGORY SECTION ================= */
+/* CATEGORY SECTION */
+.category-section{
+    background:#ffffff;
+    padding:60px 5%;
+    transform:translateY(0);
+    opacity:1;
+    max-height:2000px;
+    overflow:hidden;
+    transition:all 0.6s ease;
+}
+
+/* ACTIVE STATE */
+.category-section.active{
+    transform:translateY(0);
+    opacity:1;
+    max-height:2000px;
+}
+
+/* SECTION TITLE */
+.category-section .section-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    color:#111;
+    margin-bottom:40px;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* SEARCH */
+.category-search{
+    max-width:700px;
+    margin:0 auto 50px;
+    background:#f9f9f9;
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    padding:12px 25px;
+    border:1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.category-search:hover{
+    box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+.category-search i{
+    font-size:16px;
+    color:#777;
+    margin-right:10px;
+}
+
+/* SECTION SELECTOR DROPDOWN */
+.section-filter {
+    max-width: 200px;
+    margin: 0 auto 30px;
+}
+
+.section-filter select {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #111;
+    background: #f5f5f5;
+    appearance: none; /* remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-filter select:hover {
+    border-color: #1e3a8a; /* premium blue highlight */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Optional: Add a custom arrow using pseudo-element */
+.section-filter {
+    position: relative;
+}
+
+.section-filter::after {
+    content: "\f078"; /* FontAwesome down arrow */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #777;
+}
+.category-search input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:14px;
+    background:transparent;
+}
+
+/* GRID */
+.category-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:40px 60px;
+}
+
+/* ITEM */
+.category-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration:none;
+    color:#111;
+    font-size:14px;
+    font-weight:500;
+    padding:10px;
+    border-radius:15px;
+    background:#f5f5f5;
+    transition: all 0.4s ease;
+    opacity:0;
+    transform: translateY(30px);
+    animation: jumpIn 0.6s forwards;
+}
+
+.category-item img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.category-item:hover{
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes jumpIn{
+    0%{opacity:0; transform:translateY(30px);}
+    50%{opacity:0.7; transform:translateY(-10px);}
+    100%{opacity:1; transform:translateY(0);}
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .category-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width:768px){
+    .category-grid{
+        grid-template-columns: repeat(2, 1fr);
+        gap:30px;
+    }
+}
+
+@media(max-width:480px){
+    .category-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .category-item{
+        font-size:13px;
+    }
+}
+
+
+
+
+
+
+
+
+.user-dropdown {
+    position: absolute;
+    top: 60px; /* adjust based on navbar height */
+    right: 20px;
+    width: 220px;
+    background: #111; /* dark theme */
+    color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    display: none;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-dropdown img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.user-dropdown .user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.user-dropdown .user-email {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.user-dropdown button, .user-dropdown a {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: #111;
+    background: #fff;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.user-dropdown button:hover, .user-dropdown a:hover {
+    background: #ddd;
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+
+    <!-- VIDEO PLACEHOLDER -->
+    <video autoplay muted loop>
+        <source src="https://image.uniqlo.com/UQ/ST3/in/imagesother/2026/L1/women/Feb/LifeWear_SP.mp4" type="video/mp4">
+    </video>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <!-- LOGO (Replace image) -->
+        <div class="logo">
+            <img src="images/icon.png" alt="logo">
+        </div>
+
+        <!-- CENTER NAV -->
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="">Orders</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policies</a>
+        </div>
+
+        <!-- RIGHT ICONS -->
+     <div class="nav-icons">
+   <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
+  
+    <i class="fa-regular fa-user" id="userIcon"></i>
+    <i class="fa-solid fa-bag-shopping"></i>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</div>
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="hero-content">
+        <h4>LifeWear</h4>
+        <h1>LifeWear magazine | Light Tones, Natural Textures</h1>
+        <p>Natural fabrics and gentle lighter tones set the scene</p>
+    </div>
+
+</section>
+
+
+<!-- User Dropdown -->
+<div id="userDropdown" class="user-dropdown">
+    <!-- Filled dynamically by JS -->
+</div>
+
+
+
+
+
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-header">
+        <i class="fa-solid fa-xmark" onclick="toggleMenu()"></i>
+    </div>
+
+                <a href="/">Home</a>
+            <a href="">Orders</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policies</a>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<section class="category-section" id="categories">
+
+    <h2 class="section-title">Search By Categories</h2>
+
+    <!-- SECTION SELECTOR -->
+    <div class="section-filter">
+        <select id="frontSectionSelect">
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+            <option value="Baby">Baby</option>
+        </select>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div class="category-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+       <input type="text" id="mainSearchInput" placeholder="Search products...">
+    </div>
+
+    <!-- CATEGORY GRID -->
+    <div class="category-grid" id="frontCategoryGrid">
+        <!-- Dynamic Categories Load Here -->
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!--All Products-->
+
+    <h2 class="section-title">Featured Products</h2>
+<div class="product-container" id="productContainer"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- SakhiMart Club Section -->
+    <div class="footer-club">
+      <img src="images/icon.png" alt="SakhiMart Logo" class="footer-logo">
+      <h2>SAKHIMART CLUB <br> WILL SURPRISE YOU</h2>
+      <p>Benefits and plenty of surprises are waiting for you!<br>Sign up now</p>
+      <a href="#" class="footer-btn">Discover more</a>
+    </div>
+
+    <!-- Footer Columns -->
+    <div class="footer-columns">
+
+      <!-- Support -->
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Chat with us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Exclusive Service -->
+      <div class="footer-col">
+        <h4>Exclusive Service</h4>
+        <ul>
+          <li><a href="#">Check / Return Order</a></li>
+          <li><a href="#">Invite SakhiMart On Wheels</a></li>
+          <li><a href="#">COVID Safety Guidelines</a></li>
+          <li><a href="#">SakhiMart Loyalty</a></li>
+          <li><a href="#">SakhiMart Franchise</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">SakhiMart Worldwide</a></li>
+          <li><a href="#">CSR</a></li>
+          <li><a href="#">Awards & Recognition</a></li>
+          <li><a href="#">Become Our Partner</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <!-- Legals -->
+      <div class="footer-col">
+        <h4>Legals</h4>
+        <ul>
+          <li><a href="#">Terms and Conditions</a></li>
+          <li><a href="#">Press Release</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Whistle Blow Policy</a></li>
+          <li><a href="#">POSH Policy</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Extract of Form 5A (EPFO Code)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Row -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <a href="#"><span>📍</span>Find a Store</a>
+      <a href="#"><span>🌐</span>India | English</a>
+    </div>
+    <div class="footer-bottom-right">
+      <a href="#" class="fab">&#xf09a;</a>
+      <a href="#" class="fab">&#xf16d;</a>
+      <a href="#" class="fab">&#xf16a;</a>
+      <a href="#" class="fab">&#xf0d2;</a>
+      <a href="#" class="fab">&#xf08c;</a>
+      <a href="#" class="fab">&#xf099;</a>
+    </div>
+  </div>
+
+  <p class="footer-copy">© 2026 SakhiMart Brand – SakhiMart India – CIN: L19201WB1931PLC007261</p>
+</footer>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+const mobileMenu = document.getElementById("mobileMenu");
+
+function toggleMenu(){
+    mobileMenu.classList.toggle("active");
+}
+
+window.addEventListener("click", function(e){
+    if(!mobileMenu.contains(e.target) && 
+       !e.target.closest(".menu-toggle")){
+        mobileMenu.classList.remove("active");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+// 1️⃣ Check if token exists in URL
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get("token");
+
+if(tokenFromUrl){
+    // 2️⃣ Save it to localStorage
+    localStorage.setItem("token", tokenFromUrl);
+
+    // 3️⃣ Remove token from URL so it's not exposed
+    window.history.replaceState({}, document.title, "/");
+}
+
+// 4️⃣ Decode JWT to get user info
+const token = localStorage.getItem("token");
+if(token){
+    try {
+        // JWT format: header.payload.signature
+        const payloadBase64 = token.split('.')[1];
+        const decoded = JSON.parse(atob(payloadBase64));
+
+        // Set name & email safely
+        const email = decoded.email || "";
+        const name = decoded.name || email.split('@')[0];
+
+        localStorage.setItem("userName", name);
+        localStorage.setItem("userEmail", email);
+
+        // Optional: show welcome message
+        console.log("Welcome", name, email);
+    } catch(err){
+        console.error("Invalid token:", err);
+        localStorage.removeItem("token");
+    }
+}
+
+
+
+
+const searchBtn = document.getElementById("searchToggle");
+const categorySection = document.getElementById("categories");
+
+searchBtn.addEventListener("click", function(){
+
+    // Toggle animation
+    categorySection.classList.toggle("active");
+
+    // Smooth scroll to section
+    categorySection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+
+
+
+
+
+
+
+
+const frontSectionSelect = document.getElementById("frontSectionSelect");
+const frontCategoryGrid = document.getElementById("frontCategoryGrid");
+const categorySearchInput = document.getElementById("mainSearchInput");
+
+// Load categories on page load
+loadFrontCategories(frontSectionSelect.value);
+
+// Change section
+frontSectionSelect.addEventListener("change", function(){
+    loadFrontCategories(this.value);
+});
+
+// Load categories function
+// Load categories function
+async function loadFrontCategories(section){
+
+    frontCategoryGrid.innerHTML = "<center>Loading...</center>";
+
+    const res = await fetch(`/api/categories/${section}`);
+    const categories = await res.json();
+
+    frontCategoryGrid.innerHTML = "";
+
+    if(!categories || categories.length === 0){
+        frontCategoryGrid.innerHTML = "<p>No categories found.</p>";
+        return;
+    }
+
+    categories.forEach(cat => {
+
+        frontCategoryGrid.innerHTML += `
+            <a href="/category?section=${section}&category=${cat.name}" class="category-item">
+                <img src="${cat.image}" alt="${cat.name}">
+                <span>${cat.name}</span>
+            </a>
+        `;
+
+    });
+}
+
+
+
+
+
+
+
+
+
+const mainSearchInput = document.getElementById("mainSearchInput");
+
+mainSearchInput.addEventListener("keypress", async function(e){
+
+    if(e.key === "Enter"){
+
+        const value = this.value.trim();
+
+        if(!value) return;
+
+        const res = await fetch("/api/search-products", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ search: value })
+        });
+
+        const data = await res.json();
+
+        window.location.href = data.redirect;
+    }
+});
+
+
+
+
+
+
+
+let products = [];
+
+
+
+const productContainer = document.getElementById("productContainer");
+
+let page = 1;
+let limit = 10;
+let loading = false;
+let noMoreProducts = false;
+
+loadProducts();
+
+async function loadProducts(){
+
+    if(loading || noMoreProducts) return;
+
+    loading = true;
+
+    const res = await fetch(`/api/products?page=${page}&limit=${limit}`);
+    const data = await res.json();
+    products=data;
+
+    if(data.length === 0){
+        noMoreProducts = true;
+        return;
+    }
+
+    data.forEach(product => {
+
+        productContainer.innerHTML += `
+        <div class="product-card" onclick="goToProduct('${product._id}')">
+            <div class="product-img">
+                <img src="${product.image}" alt="product">
+            </div>
+            <h3>${product.title}</h3>
+            <p class="price">₹${product.price}</p>
+            <div class="product-buttons">
+                 <button class="cart-btn" onclick="addToCartHandler('${product._id}')">Add to Cart</button>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+        `;
+    });
+
+    page++;
+    loading = false;
+}
+
+function goToProduct(id){
+    window.location.href = `/product-item?id=${id}`;
+}
+
+window.addEventListener("scroll", () => {
+
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 200){
+        loadProducts();
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+// Toggle dropdown on user icon click
+const userIcon = document.getElementById("userIcon");
+const userDropdown = document.getElementById("userDropdown");
+
+userIcon.addEventListener("click", () => {
+    userDropdown.style.display = userDropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown if clicked outside
+window.addEventListener("click", (e) => {
+    if(!userDropdown.contains(e.target) && e.target !== userIcon){
+        userDropdown.style.display = "none";
+    }
+});
+
+// Render user info
+function renderUserDropdown() {
+    const token = localStorage.getItem("token");
+    const name = localStorage.getItem("userName");
+    const email = localStorage.getItem("userEmail");
+
+    if(token && name && email){
+        userDropdown.innerHTML = `
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="DP">
+            <div class="user-name">${name}</div>
+            <div class="user-email">${email}</div>
+            <button onclick="logout()">Logout</button>
+        `;
+    } else {
+        userDropdown.innerHTML = `
+            <div style="text-align:center; margin-bottom:10px;">Not signed in</div>
+            <a href="/login">Sign In</a>
+        `;
+    }
+}
+
+// Logout function
+function logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
+    renderUserDropdown();
+    // Optional: redirect to login page
+    window.location.href = "/login";
+}
+
+// Initial render
+renderUserDropdown();
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SakhiMart Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    overflow-x:hidden;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:70px;
+    padding:0 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#ffffff;
+    border-bottom:1px solid #eee;
+    z-index:1000;
+}
+
+.logo img{
+    height:35px;
+}
+
+.nav-icons{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-icons i{
+    font-size:18px;
+    cursor:pointer;
+    color:#000;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    width:250px;
+    height:100%;
+    background:#000;
+    color:#fff;
+    padding:40px 25px;
+    transition:0.4s ease;
+}
+
+.sidebar a{
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    padding:12px 10px;
+    margin-bottom:15px;
+    border-radius:6px;
+    transition:0.3s ease;
+}
+
+.sidebar a:hover{
+    background:#111;
+    padding-left:18px;
+}
+
+/* ACTIVE LINK */
+.sidebar a.active{
+    background:#fff;
+    color:#000;
+}
+
+/* ================= CONTENT ================= */
+
+.admin-content{
+    margin-left:250px;
+    padding:100px 40px 40px 40px;
+}
+
+.admin-content h1{
+    font-size:24px;
+    font-weight:500;
+    margin-bottom:20px;
+}
+
+/* ================= MOBILE SIDEBAR ================= */
+
+.menu-toggle{
+    display:none;
+}
+
+@media(max-width:992px){
+
+    .sidebar{
+        left:-100%;
+        width:240px;
+    }
+
+    .sidebar.active{
+        left:0;
+    }
+
+    .admin-content{
+        margin-left:0;
+        padding:100px 20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+}
+
+
+
+
+.admin-content input,
+.admin-content textarea,
+.admin-content select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    font-size:14px;
+}
+
+.admin-content button{
+    padding:10px 20px;
+    border:none;
+    background:#000;
+    color:#fff;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================= PRODUCTS SECTION ================= */
+
+#productsSection {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* ================= TABLE STYLE ================= */
+
+#productsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#productsTable thead {
+    background: #111827;
+    color: #fff;
+}
+
+#productsTable thead th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+#productsTable tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s ease;
+}
+
+#productsTable tbody tr:hover {
+    background: #f9fafb;
+}
+
+#productsTable td {
+    padding: 14px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Image Styling */
+#productsTable img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+}
+
+/* ================= BUTTONS ================= */
+
+#productsTable button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Edit Button */
+#productsTable button:first-child {
+    background: #2563eb;
+    color: #fff;
+}
+
+#productsTable button:first-child:hover {
+    background: #1d4ed8;
+}
+
+/* Delete Button */
+#productsTable button:last-child {
+    background: #dc2626;
+    color: #fff;
+}
+
+#productsTable button:last-child:hover {
+    background: #b91c1c;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 15px;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        transition: 0.3s ease;
+        z-index: 999;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    /* Hide table header */
+    #productsTable thead {
+        display: none;
+    }
+
+    #productsTable {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+    }
+
+    #productsTable,
+    #productsTable tbody {
+        display: block;
+        width: 100%;
+    }
+
+    #productsTable tr {
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        margin-bottom: 15px;
+        transition: 0.2s ease;
+    }
+
+    #productsTable tr:hover {
+        transform: translateY(-3px);
+    }
+
+    #productsTable td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        font-size: 14px;
+        border: none;
+    }
+
+    /* First TD (Image + Title together) */
+    #productsTable td:first-child {
+        justify-content: flex-start;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+
+    #productsTable img {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    /* Action Buttons */
+    #productsTable td:last-child {
+        margin-top: 10px;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    #productsTable button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* CATEGORY SECTION */
+
+#categorySection {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.category-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.category-form select,
+.category-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.category-form button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#categoryDisplay {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.cat-box {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.cat-box h3 {
+    margin-bottom: 15px;
+}
+
+.cat-item {
+    background: #fff;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cat-item button {
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+
+.cat-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    padding:8px 12px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    margin-bottom:8px;
+}
+
+.cat-item img{
+    width:40px;
+    height:40px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.cat-item button{
+    margin-left:auto;
+    background:#ff4d4d;
+    color:#fff;
+    border:none;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    cursor:pointer;
+}
+
+
+
+/* ===============================
+   RESPONSIVE CATEGORY SECTION
+==================================*/
+
+@media (max-width: 768px) {
+
+    #categorySection {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    /* FORM STACK COLUMN */
+    .category-form {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .category-form select,
+    .category-form input,
+    .category-form button {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .category-form button {
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    /* CATEGORY GRID 1 COLUMN */
+    #categoryDisplay {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .cat-box {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .cat-box h3 {
+        font-size: 16px;
+    }
+
+    .cat-item {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .cat-item img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .cat-item button {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+}
+
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+
+    #categorySection {
+        padding: 15px;
+    }
+
+    .cat-item {
+        gap: 8px;
+    }
+
+    .cat-item img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .cat-box h3 {
+        font-size: 15px;
+    }
+}
+
+
+
+
+
+/* User Dropdown */
+.user-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.user-wrapper i {
+    cursor: pointer;
+    font-size: 18px;
+    color: #000; /* or white if navbar bg is dark */
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 15px;
+    text-align: center;
+    z-index: 100;
+    animation: fadeInDropdown 0.3s ease;
+}
+
+.user-dropdown .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-dp {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #000;
+}
+
+.user-dropdown button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #e53935; /* red theme */
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user-dropdown button:hover {
+    background: #d32f2f;
+}
+
+/* Dropdown fade-in animation */
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 20px auto 40px auto;
+    color: #0d47a1; /* blue title */
+    text-align: center;
+}
+
+/* Container for cards */
+.cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+/* Individual card */
+.card {
+    background: #ffffff; /* white card */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 30px 20px;
+    width: 220px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+/* Card headings */
+.card h2 {
+    font-size: 18px;
+    color: #e53935; /* red highlight */
+    margin-bottom: 15px;
+}
+
+/* Count number in card */
+.count {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ff9800; /* orange highlight */
+}
+
+/* Dashboard graph container */
+.dashboard-graph {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    background: #ffffff; /* white background */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* Chart title */
+.dashboard-graph h3 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #0d47a1; /* blue title */
+}
+
+/* Fade-in animations */
+@keyframes fadeInUp {
+    0% { opacity:0; transform: translateY(20px);}
+    100% { opacity:1; transform: translateY(0);}
+}
+
+@keyframes fadeIn {
+    0% { opacity:0;}
+    100% { opacity:1;}
+}
+
+/* Responsive design */
+@media screen and (max-width: 1024px) {
+    .cards-container {
+        justify-content: center;
+    }
+
+    .card {
+        width: 180px;
+        padding: 20px 15px;
+    }
+
+    .count {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .dashboard-graph {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+ 
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">
+        <img src="http://localhost:3000/images/icon.png" alt="logo">
+    </div>
+
+   <div class="nav-icons">
+    <i class="fa-solid fa-bars menu-toggle" onclick="toggleSidebar()"></i>
+
+    <!-- User Wrapper -->
+    <div class="user-wrapper">
+        <i class="fa-regular fa-user" onclick="toggleUserDropdown()"></i>
+
+        <!-- Dropdown -->
+        <div class="user-dropdown" id="userDropdown">
+            <div class="user-info">
+                <img src="https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_1538647.jpg" alt="Admin" class="user-dp">
+                <span class="user-name">Admin</span>
+            </div>
+            <button onclick="adminLogout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+   <!-- Dropdown -->
+        <div class="user-dropdown" id="userDropdown">
+            <div class="user-info">
+                <img src="images/placeholder.png" alt="Admin" class="user-dp">
+                <span class="user-name">Admin</span>
+            </div>
+            <button onclick="adminLogout()">Logout</button>
+        </div>
+
+
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+<a href="#" id="dashboardBtn" class="active">
+<i class="fa-solid fa-home"></i> &nbsp; Dashboard
+</a>
+
+<a href="#" id="productsBtn">
+<i class="fa-solid fa-box"></i> &nbsp; Products
+</a>
+
+<a href="#" id="addProductBtn">
+<i class="fa-solid fa-plus"></i> &nbsp; Add Products
+</a>
+
+<a href="#" id="categoryBtn">
+<i class="fa-solid fa-layer-group"></i> &nbsp; Add Categories
+</a>
+
+<a href="#" id="usersBtn">
+<i class="fa-solid fa-users"></i> &nbsp; Users
+</a>
+
+</div>
+
+
+
+<!-- MAIN CONTENT -->
+<div class="dashboard-cards" id="dashboardSection">
+
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <div class="cards-container">
+    <!-- Total Users -->
+    <div class="card" id="totalUsersCard">
+      <h2>Total Users</h2>
+      <span class="count" id="totalUsers">0</span>
+    </div>
+
+    <!-- Total Products -->
+    <div class="card" id="totalProductsCard">
+      <h2>Total Products</h2>
+      <span class="count" id="totalProducts">0</span>
+    </div>
+
+    <!-- Total Categories -->
+    <div class="card" id="totalCategoriesCard">
+      <h2>Total Categories</h2>
+      <span class="count" id="totalCategories">0</span>
+    </div>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="dashboard-graph">
+    <h2>Products Per Section</h2>
+    <canvas id="productsGraph" height="150"></canvas>
+  </div>
+
+</div>
+
+
+
+
+<div class="admin-content">
+
+
+
+    <!-- ADD PRODUCT -->
+    <div id="addProductSection" style="display:none;">
+
+      <h1 id="productFormTitle">Add Product</h1>
+
+        <form id="productForm" enctype="multipart/form-data">
+
+            <input type="text" name="title" placeholder="Product Title" required><br><br>
+
+            <textarea name="description" placeholder="Description" required></textarea><br><br>
+
+            <select name="section" required>
+                <option value="">Select Section</option>
+                <option>Men</option>
+                <option>Women</option>
+                <option>Kids</option>
+                <option>Baby</option>
+            </select><br><br>
+
+         <select name="category" id="productCategory" required>
+    <option value="">Select Category</option>
+</select><br><br>
+
+            <input type="number" name="price" placeholder="Price" required><br><br>
+
+            <input type="text" name="imageLink" placeholder="OR Image Link"><br><br>
+
+            <label>Upload Image:</label>
+            <input type="file" name="image"><br><br>
+
+            <button type="submit" id="addproductbutton">Save Product</button>
+
+        </form>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--Products-->
+<div id="productsSection" style="display:none;">
+
+<h1>All Products</h1>
+
+<table border="1" width="100%" cellpadding="10" id="productsTable">
+<thead>
+<tr>
+<th>Image</th>
+<th>Title</th>
+<th>Price</th>
+<th>Section</th>
+<th>Category</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div id="pagination" style="margin-top:20px; text-align:center;"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="categorySection" style="display:none;">
+
+    <h1>Manage Categories</h1>
+
+    <div class="category-form">
+
+        <select id="sectionSelect">
+            <option>Men</option>
+            <option>Women</option>
+            <option>Kids</option>
+            <option>Baby</option>
+        </select>
+
+        <input type="text" id="newCategoryInput" placeholder="Enter Category Name">
+<input type="text" id="categoryImageInput" placeholder="Enter Image Link">
+        <button onclick="addCategory()">Add Category</button>
+
+    </div>
+
+    <div id="categoryDisplay"></div>
+
+</div>
+
+
+
+
+
+
+
+
+<!--Main End-->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("active");
+}
+
+/* ================= SECTION CONTROL ================= */
+
+const dashboardBtn = document.getElementById("dashboardBtn");
+const addProductBtn = document.getElementById("addProductBtn");
+const productsBtn = document.getElementById("productsBtn");
+
+const dashboardSection = document.getElementById("dashboardSection");
+const addProductSection = document.getElementById("addProductSection");
+const productsSection = document.getElementById("productsSection");
+const categoryBtn = document.getElementById("categoryBtn");
+const categorySection = document.getElementById("categorySection");
+
+categoryBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    hideAllSections();
+    categorySection.style.display = "block";
+    removeActive();
+    this.classList.add("active");
+    document.getElementById("sidebar").classList.toggle("active");
+    loadCategories();
+});
+
+function hideAllSections(){
+    dashboardSection.style.display = "none";
+    addProductSection.style.display = "none";
+    productsSection.style.display = "none";
+     categorySection.style.display = "none"; 
+}
+
+function removeActive(){
+    document.querySelectorAll(".sidebar a").forEach(link=>{
+        link.classList.remove("active");
+    });
+}
+
+/* Dashboard */
+dashboardBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    hideAllSections();
+    dashboardSection.style.display = "block";
+    removeActive();
+    this.classList.add("active");
+    document.getElementById("sidebar").classList.toggle("active");
+});
+
+/* Add Product */
+addProductBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    hideAllSections();
+    addProductSection.style.display = "block";
+    removeActive();
+    this.classList.add("active");
+      const formTitle = document.getElementById("productFormTitle");
+      document.getElementById("sidebar").classList.toggle("active");
+
+    // Change title
+    formTitle.textContent = "Add Product";
+
+});
+
+/* Products */
+productsBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    hideAllSections();
+    productsSection.style.display = "block";
+    removeActive();
+    this.classList.add("active");
+    document.getElementById("sidebar").classList.toggle("active");
+    loadProducts();
+});
+
+
+/* ================= LOAD PRODUCTS ================= */
+let currentPage = 1;
+
+async function loadProducts(page = 1){
+
+    currentPage = page;
+
+    const res = await fetch(`/api/admin/products?page=${page}`);
+    const data = await res.json();
+
+    const products = data.products;
+    const totalPages = data.totalPages;
+
+    const tbody = document.querySelector("#productsTable tbody");
+    tbody.innerHTML = "";
+
+    products.forEach(product => {
+        tbody.innerHTML += `
+        <tr>
+            <td><img src="${product.image}" width="50"></td>
+            <td>${product.title}</td>
+            <td>₹ ${product.price}</td>
+            <td>${product.section}</td>
+            <td>${product.category}</td>
+            <td>
+                <button onclick="editProduct('${product._id}')">Edit</button>
+                <button onclick="deleteProduct('${product._id}')">Delete</button>
+            </td>
+        </tr>
+        `;
+    });
+
+    renderPagination(totalPages);
+}
+
+
+
+
+
+
+
+function renderPagination(totalPages){
+
+    const pagination = document.getElementById("pagination");
+
+    if(!pagination) return; // safety
+
+    pagination.innerHTML = "";
+
+    for(let i = 1; i <= totalPages; i++){
+
+        const btn = document.createElement("button");
+
+        btn.textContent = i;
+        btn.style.margin = "5px";
+        btn.style.padding = "6px 12px";
+
+        if(i === currentPage){
+            btn.style.background = "black";
+            btn.style.color = "white";
+        }
+
+        btn.onclick = () => loadProducts(i);
+
+        pagination.appendChild(btn);
+    }
+}
+
+
+
+
+
+
+/* ================= DELETE ================= */
+
+async function deleteProduct(id){
+
+    if(!confirm("Delete this product?")) return;
+
+    await fetch(`/api/delete-product/${id}`, {
+        method: "DELETE"
+    });
+
+    loadProducts();
+}
+
+
+/* ================= EDIT ================= */
+
+async function editProduct(id){
+
+    const res = await fetch(`/api/product/${id}`);
+    const product = await res.json();
+
+    hideAllSections();
+    addProductSection.style.display = "block";
+    removeActive();
+    addProductBtn.classList.add("active");
+
+    const form = document.getElementById("productForm");
+  const formTitle = document.getElementById("productFormTitle");
+
+
+    // Change title
+    formTitle.textContent = "Edit Product";
+
+
+
+    form.title.value = product.title;
+    form.description.value = product.description;
+    form.section.value = product.section;
+   
+
+
+    form.section.value = product.section;
+
+// Load categories for that section
+const resCat = await fetch(`/api/categories/${product.section}`);
+const categories = await resCat.json();
+
+productCategorySelect.innerHTML = `<option value="">Select Category</option>`;
+
+categories.forEach(cat => {
+    const option = document.createElement("option");
+      option.value = cat.name;
+    option.textContent = cat.name;
+    productCategorySelect.appendChild(option);
+});
+
+form.category.value = product.category;
+
+
+
+
+    form.price.value = product.price;
+    form.imageLink.value = product.image;
+
+    form.dataset.editId = product._id; // Store ID
+}
+
+
+/* ================= ADD / UPDATE FORM ================= */
+
+document.getElementById("productForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const editId = this.dataset.editId;
+
+    if(editId){
+        await fetch(`/api/update-product/${editId}`, {
+            method: "PUT",
+            body: formData
+        });
+        delete this.dataset.editId;
+        alert("Product Updated!");
+    } else {
+        await fetch("/api/add-product", {
+            method: "POST",
+            body: formData
+        });
+        alert("Product Added!");
+    }
+
+    this.reset();
+});
+
+
+
+
+
+
+
+
+async function loadCategories(){
+
+    const res = await fetch("/api/categories");
+    const categories = await res.json();
+
+    const display = document.getElementById("categoryDisplay");
+    display.innerHTML = "";
+
+    categories.forEach(cat => {
+
+        let itemsHTML = "";
+
+    cat.items.forEach(item => {
+    itemsHTML += `
+        <div class="cat-item">
+            <img src="${item.image}" width="40">
+            ${item.name}
+            <button onclick="deleteCategory('${cat.name}','${item.name}')">×</button>
+        </div>
+    `;
+});
+
+        display.innerHTML += `
+            <div class="cat-box">
+                <h3>${cat.name}</h3>
+                <div class="cat-items">${itemsHTML}</div>
+            </div>
+        `;
+    });
+}
+
+
+
+
+
+
+async function addCategory(){
+
+    const section = document.getElementById("sectionSelect").value;
+    const categoryName = document.getElementById("newCategoryInput").value;
+    const image = document.getElementById("categoryImageInput").value;
+
+    if(!categoryName || !image) 
+        return alert("Enter category name and image link");
+
+    await fetch("/api/add-category", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section, categoryName, image })
+    });
+
+    document.getElementById("newCategoryInput").value = "";
+    document.getElementById("categoryImageInput").value = "";
+
+    loadCategories();
+}
+
+async function deleteCategory(section, categoryName){
+
+    await fetch("/api/delete-category", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section, categoryName })
+    });
+
+    loadCategories();
+}
+
+
+
+
+
+
+
+
+
+const productSectionSelect = document.querySelector("select[name='section']");
+const productCategorySelect = document.getElementById("productCategory");
+
+productSectionSelect.addEventListener("change", async function () {
+
+    const section = this.value;
+
+    productCategorySelect.innerHTML = `<option value="">Loading...</option>`;
+
+    if (!section) {
+        productCategorySelect.innerHTML = `<option value="">Select Category</option>`;
+        return;
+    }
+
+    const res = await fetch(`/api/categories/${section}`);
+    const categories = await res.json();
+
+    productCategorySelect.innerHTML = `<option value="">Select Category</option>`;
+
+    categories.forEach(cat => {
+        const option = document.createElement("option");
+       option.value = cat.name;
+    option.textContent = cat.name;
+        productCategorySelect.appendChild(option);
+    });
+
+});
+
+
+
+
+
+
+
+
+function toggleUserDropdown(){
+    const dropdown = document.getElementById("userDropdown");
+    dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+}
+
+// Close dropdown if clicked outside
+window.addEventListener("click", function(e){
+    const dropdown = document.getElementById("userDropdown");
+    const userIcon = document.querySelector(".user-wrapper i");
+
+    if(!e.target.closest(".user-wrapper")){
+        dropdown.style.display = "none";
+    }
+});
+
+// Logout function
+function adminLogout(){
+    fetch("/admin/logout")
+        .then(()=> window.location.href = "/admin")
+        .catch(err => console.error(err));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fetch counts from server and animate numbers
+async function loadDashboard(){
+    try{
+        const [usersRes, productsRes, categoriesRes, sectionRes] = await Promise.all([
+            fetch("/api/admin/users-count"),
+            fetch("/api/admin/products-count"),
+            fetch("/api/admin/categories-count"),
+            fetch("/api/admin/products-per-section") // for graph
+        ]);
+
+        const users = await usersRes.json(); // { total: 25 }
+        const products = await productsRes.json(); // { total: 100 }
+        const categories = await categoriesRes.json(); // { total: 10 }
+        const sections = await sectionRes.json(); // { Men: 40, Women: 30, Kids: 20, Baby: 10 }
+
+        animateCount("totalUsers", users.total);
+        animateCount("totalProducts", products.total);
+        animateCount("totalCategories", categories.total);
+
+        renderGraph(sections);
+
+    }catch(err){
+        console.error(err);
+    }
+}
+
+// Animate count numbers
+function animateCount(id, target){
+    const el = document.getElementById(id);
+    let count = 0;
+    const step = Math.ceil(target/100);
+    const interval = setInterval(()=>{
+        count += step;
+        if(count >= target){
+            count = target;
+            clearInterval(interval);
+        }
+        el.textContent = count;
+    }, 15);
+}
+
+// Render graph using Chart.js
+function renderGraph(data){
+    const ctx = document.getElementById("productsGraph").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: Object.keys(data),
+            datasets: [{
+                label: "Products per Section",
+                data: Object.values(data),
+                backgroundColor: ["#e53935","#ff1744","#f06292","#ff8a65"],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive:true,
+            plugins:{legend:{display:false}},
+            scales:{y:{beginAtZero:true}}
+        }
+    });
+}
+
+// Load dashboard on page load
+window.addEventListener("DOMContentLoaded", loadDashboard);
+</script>
+
+</body>
+</html>
