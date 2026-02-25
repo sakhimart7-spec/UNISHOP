@@ -142,7 +142,7 @@ app.use("/products_images", express.static("products_images"));
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "https://unishop-gxq5.onrender.com/auth/google/callback"
 },
 async (accessToken, refreshToken, profile, done) => {
 
