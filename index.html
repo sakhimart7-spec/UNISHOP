@@ -709,7 +709,7 @@ body{
    <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
   
     <i class="fa-regular fa-user" id="userIcon"></i>
-    <i class="fa-solid fa-bag-shopping"></i>
+    <i class="fa-solid fa-bag-shopping" onclick="RedirectCart()"></i>
     <div class="menu-toggle" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -935,7 +935,9 @@ window.addEventListener("click", function(e){
 
 
 
-
+function RedirectCart(){
+    window.location.href="/cart"
+}
 
 
 
