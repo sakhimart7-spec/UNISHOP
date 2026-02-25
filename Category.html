@@ -594,12 +594,16 @@ body{
 .user-dropdown .user-name {
     font-weight: bold;
     margin-bottom: 5px;
+    word-break: break-word;   /* Wrap long words */
+    white-space: normal;   
 }
 
 .user-dropdown .user-email {
     font-size: 0.85rem;
     margin-bottom: 10px;
     opacity: 0.8;
+    word-break: break-word;   /* Wrap long words */
+    white-space: normal;   
 }
 
 .user-dropdown button, .user-dropdown a {
@@ -640,17 +644,17 @@ body{
         <!-- CENTER NAV -->
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="">Orders</a>
+            <a href="/orders">Orders</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policies</a>
         </div>
 
         <!-- RIGHT ICONS -->
      <div class="nav-icons">
-   <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
+   <i class="fa-solid fa-magnifying-glass" onclick="RedirectSearch()"></i>
   
     <i class="fa-regular fa-user" id="userIcon"></i>
-    <i class="fa-solid fa-bag-shopping"></i>
+    <i class="fa-solid fa-bag-shopping" onclick="RedirectCart()"></i>
     <div class="menu-toggle" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -684,7 +688,7 @@ body{
     </div>
 
                 <a href="/">Home</a>
-            <a href="">Orders</a>
+            <a href="/orders">Orders</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policies</a>
 
@@ -814,9 +818,14 @@ window.addEventListener("click", function(e){
 
 
 
+function RedirectCart(){
+    window.location.href="/cart"
+}
 
 
-
+function RedirectSearch(){
+    window.location.href = "/";
+}
 
 
 
@@ -864,7 +873,7 @@ async function loadCategoryProducts(){
     products.forEach(product => {
 
         productContainer.innerHTML += `
-        <div class="product-card">
+        <div class="product-card" onclick="goToProduct('${product._id}')">
             <div class="product-img">
                 <img src="${product.image}" alt="product">
             </div>
@@ -884,6 +893,10 @@ async function loadCategoryProducts(){
 
 
 
+
+function goToProduct(id){
+    window.location.href = `/product-item?id=${id}`;
+}
 
 
 

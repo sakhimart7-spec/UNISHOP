@@ -191,349 +191,6 @@ body{
 
 
 
-/*All Products*/
-
-/* PRODUCTS SECTION */
-.products{
-    padding:80px 5%;
-    background:#ffffff;
-}
-
-.section-title{
-    text-align:center;
-    font-size:28px;
-    font-weight:500;
-    margin-bottom:50px;
-}
-
-/* FLEX CONTAINER */
-.product-container{
-    display:flex;
-    gap:30px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-/* PRODUCT CARD */
-.product-card{
-    width:250px;
-    background:#fff;
-    border:1px solid #eee;
-    padding:20px;
-    text-align:center;
-    transition:0.3s ease;
-}
-
-.product-card:hover{
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    transform:translateY(-5px);
-}
-
-/* IMAGE WRAPPER */
-.product-img{
-    width:100%;
-    height:300px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-}
-
-.product-img img{
-    max-width:100%;
-    max-height:100%;
-    object-fit:contain;   /* Full image visible */
-}
-
-/* TEXT */
-.product-card h3{
-    font-size:16px;
-    font-weight:500;
-    margin:15px 0 8px;
-}
-
-.price{
-    font-size:15px;
-    font-weight:600;
-    margin-bottom:15px;
-}
-
-/* BUTTONS */
-.product-buttons{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-}
-
-.cart-btn{
-    padding:8px 12px;
-    border:1px solid #000;
-    background:#fff;
-    cursor:pointer;
-    font-size:13px;
-    transition:0.3s;
-}
-
-.cart-btn:hover{
-    background:#000;
-    color:#fff;
-}
-
-.buy-btn{
-    padding:8px 12px;
-    border:none;
-    background:#000;
-    color:#fff;
-    cursor:pointer;
-    font-size:13px;
-    transition:0.3s;
-}
-
-.buy-btn:hover{
-    opacity:0.8;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-    .product-card{
-        width:45%;
-    }
-}
-
-@media(max-width:480px){
-    .product-card{
-        width:100%;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* SECTION BACKGROUND */
-/* HIDDEN STATE */
-.category-section{
-    background:#ffffff;
-    padding:60px 5%;
-    transform:translateY(-50px);
-    opacity:0;
-    max-height:0;
-    overflow:hidden;
-    transition:all 0.6s ease;
-}
-
-/* ACTIVE STATE */
-.category-section.active{
-    transform:translateY(0);
-    opacity:1;
-    max-height:2000px;
-}
-/* SEARCH */
-.category-search{
-    max-width:700px;
-    margin:0 auto 50px;
-    background:#fff;
-    border-radius:50px;
-    display:flex;
-    align-items:center;
-    padding:12px 25px;
-    border:1px solid #ddd;
-}
-
-.category-search i{
-    font-size:14px;
-    color:#777;
-    margin-right:10px;
-}
-
-.category-search input{
-    border:none;
-    outline:none;
-    width:100%;
-    font-size:14px;
-    background:transparent;
-}
-
-/* GRID */
-.category-grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:40px 60px;
-}
-
-/* ITEM */
-.category-item{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    text-decoration:none;
-    color:#111;
-    font-size:14px;   /* small font */
-    font-weight:400;
-    transition:0.3s ease;
-}
-
-.category-item img{
-    width:55px;
-    height:55px;
-    object-fit:contain;
-}
-
-.category-item:hover{
-    opacity:0.6;
-}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-    .category-grid{
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media(max-width:768px){
-    .category-grid{
-        grid-template-columns: repeat(2, 1fr);
-        gap:30px;
-    }
-}
-
-@media(max-width:480px){
-    .category-grid{
-        grid-template-columns: 1fr;
-    }
-
-    .category-item{
-        font-size:13px;
-    }
-}
-
-
-
-
-
-
-
-
-/* ================= CATEGORY SECTION ================= */
-
-.category-section{
-    padding:80px 5%;
-    background:#f8fafc;
-}
-
-.section-title{
-    text-align:center;
-    font-size:32px;
-    font-weight:600;
-    margin-bottom:30px;
-}
-
-/* Section Dropdown */
-
-.section-filter{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.section-filter select{
-    padding:10px 18px;
-    border-radius:8px;
-    border:1px solid #ddd;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-/* Search Bar Premium */
-
-.search-bar{
-    max-width:500px;
-    margin:0 auto 40px auto;
-    position:relative;
-}
-
-.search-bar input{
-    width:100%;
-    padding:14px 20px;
-    padding-right:50px;
-    border-radius:50px;
-    border:none;
-    outline:none;
-    font-size:15px;
-    background:rgba(255,255,255,0.9);
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    transition:0.3s ease;
-}
-
-.search-bar input:focus{
-    box-shadow:0 15px 40px rgba(147,51,234,0.25);
-    transform:translateY(-2px);
-}
-
-/* Optional Search Icon Inside */
-.search-bar::after{
-    content:"\f002";
-    font-family:"Font Awesome 6 Free";
-    font-weight:900;
-    position:absolute;
-    right:20px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#9333ea;
-    pointer-events:none;
-}
-
-.category-search input{
-    border:none;
-    outline:none;
-    flex:1;
-    margin-left:10px;
-}
-
-/* Grid */
-
-.category-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:25px;
-}
-
-.category-item{
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    text-align:center;
-    text-decoration:none;
-    color:#111;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
-
-.category-item:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(147,51,234,0.25);
-}
-
-.category-item img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-}
-
-.category-item span{
-    display:block;
-    padding:15px;
-    font-weight:500;
-}
-
-
 
 
 
@@ -604,6 +261,129 @@ body{
     background: #ddd;
 }
 
+
+
+
+
+
+.orders-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.order-card h4 { margin: 0 0 10px; }
+.order-card p { margin: 5px 0; }
+.delivery-bar {
+  height: 10px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.delivery-progress {
+  height: 100%;
+  width: 0%;
+  background: green;
+  transition: width 0.5s ease;
+}
+.order-actions {
+  margin-top: 10px;
+}
+.order-actions button {
+  background: #ff4d4f;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.order-actions button:hover { opacity: 0.9; }
+
+
+
+
+
+
+.delivery-stages {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* align labels above line */
+  position: relative;
+  margin: 20px 0;
+  padding-top: 20px; /* space for labels above dots */
+}
+
+.delivery-stages::before {
+  content: '';
+  position: absolute;
+  top: 18px; /* position line under labels */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #ccc;
+  z-index: 1;
+}
+
+.delivery-stages::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 0;
+  height: 4px;
+  background: green;
+  width: var(--fill, 0%);
+  z-index: 2;
+  transition: width 0.5s ease;
+}
+
+.stage {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 3;
+}
+
+.stage-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ccc;
+  margin: 0 auto;
+}
+
+.stage.completed .stage-dot {
+  background: green;
+}
+
+.stage-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 6px; /* space between label and dot */
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .stage-label {
+    font-size: 10px;
+  }
+  .stage-dot {
+    width: 12px;
+    height: 12px;
+  }
+  .delivery-stages::before, .delivery-stages::after {
+    top: 16px;
+    height: 3px;
+  }
+}
 </style>
 </head>
 <body>
@@ -632,7 +412,7 @@ body{
    <i class="fa-solid fa-magnifying-glass" onclick="RedirectSearch()"></i>
   
     <i class="fa-regular fa-user" id="userIcon"></i>
-    <i class="fa-solid fa-bag-shopping" onclick="RedirectCart()"></i>
+    <i class="fa-solid fa-bag-shopping"></i>
     <div class="menu-toggle" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -642,6 +422,10 @@ body{
 
 
 </section>
+
+
+
+
 
 
 
@@ -657,6 +441,7 @@ body{
 
 
 
+
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
 
@@ -665,33 +450,24 @@ body{
     </div>
 
                 <a href="/">Home</a>
-            <a href="/orders">Orders</a>
+            <a href="">Orders</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policies</a>
 
 </div>
 
-<section class="products">
 
-    <h2 class="section-title">Search Results</h2>
 
-    <div class="search-bar" id="searchBar">
-        <input type="text" id="productSearchInput">
-    </div>
 
-    <div class="product-container" id="productContainer">
-    </div>
 
+
+
+<section class="orders-section">
+  <center><h2>My Orders</h2></center><br>
+  <div id="ordersContainer">
+    <!-- Orders will load here dynamically -->
+  </div>
 </section>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -806,9 +582,6 @@ window.addEventListener("click", function(e){
 
 
 
-function RedirectSearch(){
-    window.location.href = "#searchBar";
-}
 
 function RedirectCart(){
     window.location.href="/cart"
@@ -817,95 +590,9 @@ function RedirectCart(){
 
 
 
-
-
-
-
-const productContainer = document.getElementById("productContainer");
-const productSearchInput = document.getElementById("productSearchInput");
-
-// Load products on page load
-loadSearchProducts();
-
-async function loadSearchProducts(){
-
-    const res = await fetch("/api/get-search-products");
-    const data = await res.json();
-
-    productSearchInput.value = data.search;
-
-    productContainer.innerHTML = "";
-
-    if(data.products.length === 0){
-        productContainer.innerHTML = "<p>No products found.</p>";
-        return;
-    }
-
-    data.products.forEach(product => {
-
-        productContainer.innerHTML += `
-        <div class="product-card" onclick="goToProduct('${product._id}')">
-            <div class="product-img">
-                <img src="${product.image}" alt="product">
-            </div>
-            <h3>${product.title}</h3>
-            <p class="price">₹${product.price}</p>
-            <div class="product-buttons">
-                <button class="cart-btn">Add to Cart</button>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-        </div>
-        `;
-
-    });
+function RedirectSearch(){
+    window.location.href = "/";
 }
-
-
-
-
-
-
-
-
-
-
-// Search when user presses Enter
-productSearchInput.addEventListener("keypress", async function(e){
-
-    if(e.key === "Enter"){
-
-        const value = this.value.trim();
-        if(!value) return;
-
-        const res = await fetch("/api/search-products", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ search: value })
-        });
-
-    
-
-      const data = await res.json();
-
-if(data.redirect){
-    window.location.href = data.redirect;
-    return;
-}
-
-    }
-
-});
-
-
-function goToProduct(id){
-    window.location.href = `/product-item?id=${id}`;
-}
-
-
-
-
-
-
 
 
 
@@ -959,6 +646,124 @@ function logout(){
 
 // Initial render
 renderUserDropdown();
+
+
+
+
+
+
+async function loadUserOrders() {
+  const userEmail = localStorage.getItem("userEmail");
+  if (!userEmail) {
+    document.getElementById("ordersContainer").innerHTML = "<p>Please login to see your orders.</p>";
+    return;
+  }
+
+  try {
+    // Fetch all orders for this email
+    const res = await fetch(`/api/orders?email=${encodeURIComponent(userEmail)}`);
+    const orders = await res.json();
+
+    if (!orders || orders.length === 0) {
+      document.getElementById("ordersContainer").innerHTML = "<p>No orders found.</p>";
+      return;
+    }
+
+    const container = document.getElementById("ordersContainer");
+    container.innerHTML = "";
+orders.forEach(order => {
+  const container = document.getElementById("ordersContainer");
+
+  const orderCard = document.createElement("div");
+  orderCard.classList.add("order-card");
+
+  // Create progress stages
+let completedStages = order.delivery.filter(s => s.status).length;
+let totalStages = order.delivery.length;
+let linePercent = (completedStages / totalStages) * 100;
+
+let stagesHTML = `<div class="delivery-stages" style="--fill:${linePercent}%;">`;
+order.delivery.forEach(stage => {
+  stagesHTML += `
+    <div class="stage ${stage.status ? 'completed' : ''}">
+      <span class="stage-dot"></span>
+      <span class="stage-label">${stage.stage}</span>
+    </div>
+  `;
+});
+stagesHTML += `</div>`;
+
+  orderCard.innerHTML = `
+    <h4>${order.product.title}</h4>
+    <p>Quantity: ${order.product.qty}</p>
+    <p>Unit Price: ₹${order.product.price}</p>
+    <p>Total: ₹${order.product.price * order.product.qty}</p>
+    <p>Delivery To: ${order.customer.name}, ${order.customer.address}, Phone: ${order.customer.phone}</p>
+
+    ${stagesHTML}
+
+    <div class="order-actions">
+      <button class="cancel-btn">Cancel / Remove</button>
+    </div>
+  `;
+
+  // Cancel / remove button
+  const cancelBtn = orderCard.querySelector(".cancel-btn");
+  cancelBtn.addEventListener("click", async () => {
+    const confirmCancel = confirm(`Do you want to cancel the order for "${order.product.title}"?`);
+    if (!confirmCancel) return;
+
+    // Remove from DB
+    try {
+      const res = await fetch(`/api/order/${order._id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ Order removed successfully!");
+        orderCard.remove();
+      } else {
+        alert("❌ Failed to remove order.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Error removing order.");
+    }
+  });
+
+  container.appendChild(orderCard);
+});
+
+  } catch(err) {
+    console.error(err);
+    document.getElementById("ordersContainer").innerHTML = "<p>Failed to load orders.</p>";
+  }
+}
+
+// Cancel order opens WhatsApp pre-filled
+function cancelOrder(orderId, productTitle, qty, price) {
+  const name = prompt("Please enter your name for cancellation message:");
+  const phone = prompt("Your phone number:");
+  const email = localStorage.getItem("userEmail");
+
+  if (!name || !phone) return alert("Name and phone required.");
+
+  const totalPrice = qty * price;
+  const message = `Hello, I want to cancel my order:
+*Product:* ${productTitle}
+*Quantity:* ${qty}
+*Total Price:* ₹${totalPrice}
+*Name:* ${name}
+*Phone:* ${phone}
+*Email:* ${email}`;
+
+  window.open(`https://wa.me/917076119520?text=${encodeURIComponent(message)}`, "_blank");
+}
+
+// Load orders on page load
+window.addEventListener("load", loadUserOrders);
+
+
+
+
 </script>
 
 </body>

@@ -84,6 +84,7 @@ let db;
 let Products; 
 let Categories; 
 let Users;
+let Orders;
 
 async function connectDB() {
   try {
@@ -94,6 +95,7 @@ async function connectDB() {
     Products = db.collection("products");  
     Categories = db.collection("categories"); 
     Users = db.collection("users");
+    Orders = db.collection("orders");
   } catch (error) {
     console.error("❌ MongoDB Connection Failed:", error);
     process.exit(1);
@@ -566,6 +568,184 @@ app.get("/api/admin/products-per-section", async (req,res)=>{
 
 
 
+
+
+
+// Get all users
+app.get("/api/admin/users", async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+
+    const users = await Users.find().skip(skip).limit(limit).toArray();
+    const totalUsers = await Users.countDocuments();
+
+    res.json({ users, totalUsers });
+});
+
+// Delete a user
+app.delete("/api/admin/delete-user/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        await Users.deleteOne({ _id: new ObjectId(id) });
+        res.json({ message: "User deleted" });
+    } catch(err) {
+        res.status(500).json({ message: "Failed to delete user" });
+    }
+});
+
+
+
+
+
+
+
+
+
+app.post("/api/order", async (req, res) => {
+    try {
+        const { product, customer, userEmail, delivery, createdAt } = req.body;
+
+        if(!userEmail || !product || !customer) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const order = {
+            product,
+            userEmail,
+            customer,
+            delivery: delivery || [
+                { stage: "Reached", status: false },
+                { stage: "Shipped", status: false },
+                { stage: "Delivered", status: false }
+            ],
+            createdAt: createdAt || new Date()
+        };
+
+        const result = await Orders.insertOne(order);
+
+        res.json({ success: true, orderId: result.insertedId });
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ message: "Order failed" });
+    }
+});
+
+
+
+// Corrected GET route using the same collection as POST
+app.get("/api/orders", async (req, res) => {
+  const { email } = req.query;
+  if (!email) return res.status(400).json({ error: "Email required" });
+
+  try {
+    // Use the same collection/variable as in POST (Orders)
+    const orders = await Orders.find({ userEmail: email }).sort({ createdAt: -1 }).toArray();
+    res.json(orders);
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
+
+
+
+app.delete("/api/order/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Orders.deleteOne({ _id: new ObjectId(id) });
+    if(result.deletedCount === 1){
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ success: false, message: "Failed to delete order" });
+  }
+});
+
+
+
+
+
+
+// Admin: Get all orders with pagination
+app.get("/admin/api/orders", async (req, res) => {
+    let { page = 1, limit = 10 } = req.query;
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    try {
+        const totalOrders = await Orders.countDocuments();
+        const orders = await Orders.find()
+            .sort({ createdAt: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .toArray();
+
+        res.json({ orders, totalOrders });
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch orders" });
+    }
+});
+
+// Admin: Delete order
+app.delete("/admin/api/order/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await Orders.deleteOne({ _id: new ObjectId(id) });
+        if(result.deletedCount === 1){
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
+    } catch(err){
+        console.error(err);
+        res.status(500).json({ success: false, message: "Failed to delete order" });
+    }
+});
+
+// Admin: Update delivery status
+app.put("/admin/api/order/:id/update-delivery", async (req, res) => {
+    const { id } = req.params;
+    const { index, status } = req.body;
+
+    try {
+        const order = await Orders.findOne({ _id: new ObjectId(id) });
+        if(!order) return res.status(404).json({ error: "Order not found" });
+
+        order.delivery[index].status = status;
+        await Orders.updateOne({ _id: new ObjectId(id) }, { $set: { delivery: order.delivery } });
+
+        res.json({ success: true });
+    } catch(err){
+        console.error(err);
+        res.status(500).json({ error: "Failed to update delivery" });
+    }
+});
+
+
+
+
+// Admin: Get single order by ID
+app.get("/admin/api/order/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const order = await Orders.findOne({ _id: new ObjectId(id) });
+        if (!order) return res.status(404).json({ error: "Order not found" });
+
+        res.json(order);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch order" });
+    }
+});
+
+
+
+
 // Admin Login API using .env credentials
 app.post("/admin/login", async (req,res) => {
     const { id, password } = req.body;
@@ -625,6 +805,11 @@ app.get("/products", (req, res) => {
 
 app.get("/cart", (req, res) => {
   res.sendFile(__dirname + "/Cart.html");
+});
+
+
+app.get("/orders", (req, res) => {
+  res.sendFile(__dirname + "/Order.html");
 });
 
 app.get("/category", (req, res) => {

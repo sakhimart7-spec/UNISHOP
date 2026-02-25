@@ -229,12 +229,16 @@ body{
 .user-dropdown .user-name {
     font-weight: bold;
     margin-bottom: 5px;
+    word-break: break-word;   /* Wrap long words */
+    white-space: normal;   
 }
 
 .user-dropdown .user-email {
     font-size: 0.85rem;
     margin-bottom: 10px;
     opacity: 0.8;
+    word-break: break-word;   /* Wrap long words */
+    white-space: normal;   
 }
 
 .user-dropdown button, .user-dropdown a {
@@ -394,6 +398,81 @@ body{
         text-align: left;
     }
 }
+
+
+
+
+
+
+
+/* Order Modal */
+#orderModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; top:0; left:0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.order-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px; width: 90%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+#orderForm input,
+#orderForm textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #0d47a1;
+}
+
+#orderForm button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#orderForm button[type="submit"] {
+  background: #0d47a1;
+  color: #fff;
+}
+
+#orderForm button#cancelOrder {
+  background: #ccc;
+  color: #000;
+}
+
+#deliveryProgress { display:none; margin-top:15px; }
+#deliveryProgress .progress-bar {
+  position: relative;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progressLine {
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  background: green;
+  border-radius: 5px;
+  transition: width 2s ease;
+}
+
+/* Responsive */
+@media (max-width:480px){
+  .order-modal-content { width: 95%; }
+}
 </style>
 </head>
 <body>
@@ -412,17 +491,17 @@ body{
         <!-- CENTER NAV -->
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="">Orders</a>
+            <a href="/orders">Orders</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policies</a>
         </div>
 
         <!-- RIGHT ICONS -->
      <div class="nav-icons">
-   <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
+   <i class="fa-solid fa-magnifying-glass" onclick="RedirectSearch()"></i>
   
     <i class="fa-regular fa-user" id="userIcon"></i>
-    <i class="fa-solid fa-bag-shopping"></i>
+    <i class="fa-solid fa-bag-shopping" onclick="RedirectCart()"></i>
     <div class="menu-toggle" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -460,7 +539,7 @@ body{
     </div>
 
                 <a href="/">Home</a>
-            <a href="">Orders</a>
+            <a href="/orders">Orders</a>
             <a href="#">Terms & Conditions</a>
             <a href="#">Privacy Policies</a>
 
@@ -480,6 +559,34 @@ body{
         <!-- Total items and total price -->
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+<!-- Order Modal -->
+<div id="orderModal" style="display:none;">
+  <div class="order-modal-content">
+   <center> <h2>Confirm Order</h2></center><br>
+    <form id="orderForm">
+      <input type="text" id="orderName" placeholder="Your Name" required>
+      <input type="tel" id="orderPhone" placeholder="Phone Number" required>
+      <textarea id="orderAddress" placeholder="Address" required></textarea>
+      <button type="submit">Confirm Order</button>
+      <button type="button" id="cancelOrder">Cancel</button>
+    </form>
+    <div id="deliveryProgress">
+      <div class="progress-bar">
+        <div id="progressLine"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -597,8 +704,13 @@ window.addEventListener("click", function(e){
 
 
 
+function RedirectSearch(){
+    window.location.href = "/";
+}
 
-
+function RedirectCart(){
+    window.location.href="/cart"
+}
 
 
 
@@ -726,39 +838,140 @@ function removeItem(index) {
 }
 
 // Dummy order function
+
+
+
+
+
+
+let currentOrderItem = null;
+
+// Ensure user is logged in before opening modal
 function orderNow(productId) {
-    alert(`Order placed for product ID: ${productId}`);
+    const token = localStorage.getItem("token");
+    const userEmail = localStorage.getItem("userEmail"); // ✅ only email
+
+    if (!token || !userEmail) {
+        alert("❌ You must be logged in to place an order!");
+        return window.location.href = "/login";
+    }
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const item = cart.find(i => i._id === productId);
+    if(!item) return alert("Item not found in cart!");
+
+    currentOrderItem = item;
+    document.getElementById("orderModal").style.display = "flex";
 }
+
+// Cancel button
+document.getElementById("cancelOrder").addEventListener("click", () => {
+    document.getElementById("orderModal").style.display = "none";
+});
+
+// Handle form submit
+document.getElementById("orderForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const userEmail = localStorage.getItem("userEmail"); // ✅ only email
+
+    if(!token || !userEmail){
+        alert("❌ You must be logged in to place an order!");
+        return window.location.href = "/login";
+    }
+
+    if(!currentOrderItem) return;
+
+    const name = document.getElementById("orderName").value;
+    const phone = document.getElementById("orderPhone").value;
+    const address = document.getElementById("orderAddress").value;
+
+    if(!name || !phone || !address){
+        return alert("Please fill all fields!");
+    }
+
+    // Prepare order object with only email
+    const orderData = {
+        product: {
+            productId: currentOrderItem._id,
+            title: currentOrderItem.title,
+            price: currentOrderItem.price,
+            qty: currentOrderItem.qty
+        },
+        userEmail: userEmail, // ✅ no userId
+        customer: { name, phone, address },
+        delivery: [
+            { stage: "Reached", status: false },
+            { stage: "Shipped", status: false },
+            { stage: "Delivered", status: false }
+        ],
+        createdAt: new Date()
+    };
+
+    try {
+        await fetch("/api/order", {
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(orderData)
+        });
+
+        // Animate progress bar
+        const progressLine = document.getElementById("progressLine");
+        const deliveryProgress = document.getElementById("deliveryProgress");
+
+        deliveryProgress.style.display = "block";
+        progressLine.style.width = "0%";
+
+        setTimeout(() => {
+            progressLine.style.width = "100%";
+        }, 50);
+
+        setTimeout(() => {
+            alert("✅ Order confirmed!");
+
+            // WhatsApp redirect
+            const totalPrice = currentOrderItem.price * currentOrderItem.qty;
+            const phoneNumber = "917076119520";
+            const message = `Hi, I want to order this product:
+*Product:* ${currentOrderItem.title}
+*Quantity:* ${currentOrderItem.qty}
+*Unit Price:* ₹${currentOrderItem.price}
+*Total Price:* ₹${totalPrice}
+*Name:* ${name}
+*Phone:* ${phone}
+*Address:* ${address}
+*Email:* ${userEmail}`;
+
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+
+            // Reset modal
+            deliveryProgress.style.display = "none";
+            progressLine.style.width = "0%";
+            document.getElementById("orderModal").style.display = "none";
+        }, 2000);
+
+    } catch(err){
+        console.error(err);
+        alert("❌ Order failed, try again!");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 // Load on page
 loadCart();
 
-// Dummy orderNow function
-function orderNow(productId) {
-    // Get cart from localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Find the item
-    const item = cart.find(i => i._id === productId);
-    if (!item) return alert("Item not found in cart!");
-
-    // Compose message
-    const phoneNumber = "917076119520"; // Replace with your number (India code +91)
-    const totalPrice = item.price * item.qty;
-
-    const message = 
-`Hi, I want to order this product:
-*Product:* ${item.title}
-*Quantity:* ${item.qty}
-*Unit Price:* ₹${item.price}
-*Price:* ₹${totalPrice}`;
-
-    // Encode message for URL
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-    // Open WhatsApp in new tab/app
-    window.open(url, "_blank");
-}
+//
 </script>
 
 </body>

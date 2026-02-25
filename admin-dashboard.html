@@ -68,6 +68,7 @@ body{
     color:#fff;
     padding:40px 25px;
     transition:0.4s ease;
+    z-index: 1000;
 }
 
 .sidebar a{
@@ -151,6 +152,7 @@ body{
     background:#000;
     color:#fff;
     cursor:pointer;
+    margin-bottom: 8px;
     border-radius:5px;
 }
 
@@ -225,6 +227,7 @@ body{
     padding: 6px 12px;
     border: none;
     border-radius: 6px;
+    margin-bottom: 8px;
     cursor: pointer;
     font-size: 13px;
     margin-right: 6px;
@@ -740,8 +743,350 @@ body{
     }
 }
 
+
+
+
+
+
+
+
+
+/* USERS TABLE STYLING */
+/* USERS TABLE STYLING */
+#usersSection {
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+#usersTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#usersTable th, #usersTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#usersTable th {
+    background-color: #0d47a1; /* dark blue header */
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+}
+
+#usersTable tbody tr:nth-child(even) {
+    background-color: #f5f5f5; /* light gray stripes */
+}
+
+#usersTable tbody tr:hover {
+    background-color: #e3f2fd; /* subtle blue hover */
+}
+
+#usersTable td button {
+    background-color: #0d47a1;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#usersTable td button:hover {
+    background-color: #1976d2;
+}
+
+#usersTable td img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* =================================== */
+/* RESPONSIVE CARD VIEW ON SMALL SCREENS */
+@media screen and (max-width: 768px) {
+    #usersTable, #usersTable thead, #usersTable tbody, #usersTable th, #usersTable td, #usersTable tr {
+        display: block;
+        width: 100%;
+    }
+
+    #usersTable thead tr {
+        display: none; /* hide headers */
+    }
+
+    #usersTable tbody tr {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #usersTable td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-bottom: 1px solid #eee;
+        text-align: right;
+        position: relative;
+    }
+
+    #usersTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        font-weight: 600;
+        color: #0d47a1;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    #usersTable td:last-child {
+        border-bottom: 0;
+    }
+
+    #usersTable td button {
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    #usersTable td img {
+        margin-right: 10px;
+    }
+}
  
 
+/* ---------- SECTION TITLE ---------- */
+/* ---------- SECTION TITLE ---------- */
+/* ---------- SECTION TITLE ---------- */
+/* ---------- SECTION TITLE ---------- */
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0d47a1;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ---------- TABLE STYLE ---------- */
+#ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#ordersTable th,
+#ordersTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#ordersTable th {
+    background-color: #0d47a1;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+#ordersTable td {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+#ordersTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ---------- PAGINATION ---------- */
+#ordersPagination {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#ordersPagination button {
+    margin: 3px;
+    padding: 6px 12px;
+    border: 1px solid #0d47a1;
+    border-radius: 4px;
+    background: #fff;
+    color: #0d47a1;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#ordersPagination button.active,
+#ordersPagination button:hover {
+    background: #0d47a1;
+    color: #fff;
+}
+
+/* ---------- MODAL OVERLAY ---------- */
+#orderModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    padding: 15px;
+}
+
+/* ==================== MODAL BOX ==================== */
+.modal-box {
+    background: #fff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    padding: 25px 20px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: modalFadeIn 0.3s ease forwards;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.modal-box h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #0d47a1;
+    text-align: center;
+}
+
+/* ==================== MODAL CONTENT ==================== */
+#modalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#modalContent label {
+    display: flex;
+    align-items: center;   /* aligns checkbox and text */
+    gap: 12px;             /* space between checkbox and label text */
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+}
+
+#modalContent input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-close {
+    align-self: center;    
+    width: 100%;
+    padding: 10px 0;
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #d32f2f;
+}
+
+@keyframes modalFadeIn {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- RESPONSIVE: TABLE AS CARDS ---------- */
+@media (max-width: 768px) {
+    #ordersTable, 
+    #ordersTable thead, 
+    #ordersTable tbody, 
+    #ordersTable th, 
+    #ordersTable td, 
+    #ordersTable tr {
+        display: block;
+        width: 100%;
+    }
+
+    #ordersTable thead tr {
+        display: none; /* hide table headers */
+    }
+
+    #ordersTable tr {
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    #ordersTable td {
+        text-align: right;
+        padding: 8px 10px;
+        position: relative;
+        border: none;
+        font-size: 0.9rem;
+    }
+
+    #ordersTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 50%;
+        text-align: left;
+        font-weight: 600;
+        color: #0d47a1;
+    }
+
+    #ordersTable td:last-child {
+        text-align: center;
+    }
+
+    /* Ensure modal fits small screens */
+    .modal-box {
+        width: 95%;
+        padding: 20px 15px;
+    }
+
+    .modal-box h2 {
+        font-size: 1.3rem;
+    }
+
+    #modalContent label {
+        font-size: 0.95rem;
+        gap: 10px;
+    }
+
+    #modalContent input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+
+    .modal-close {
+        font-size: 0.95rem;
+        padding: 8px 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -808,7 +1153,99 @@ body{
 <i class="fa-solid fa-users"></i> &nbsp; Users
 </a>
 
+<a href="#" id="ordersBtn">
+<i class="fa-solid fa-users"></i> &nbsp; Orders
+</a>
+
 </div>
+
+
+
+
+
+
+
+<div class="admin-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ORDERS SECTION -->
+<div id="ordersSection" style="display:none;">
+  <h1 class="section-title">All Orders</h1>
+
+  <div class="table-responsive">
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Product</th>
+          <th>Delivery</th>
+          <th>Created At</th>
+          <th>Control</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="ordersPagination" class="pagination"></div>
+</div>
+
+<!-- ==================== MODAL FOR ORDER CONTROL ==================== -->
+<div id="orderModal">
+  <div class="modal-box">
+    <h2>Update Delivery Status</h2>
+    <div id="modalContent"></div>
+    <button class="modal-close" onclick="closeOrderModal()">Close</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- USERS SECTION -->
+<div id="usersSection" style="display:none;">
+  <h1>All Users</h1>
+  <table border="1" width="100%" cellpadding="10" id="usersTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Provider</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div id="usersPagination" style="margin-top:20px; text-align:center;"></div>
+</div>
+
+
+
+
+
+
 
 
 
@@ -848,7 +1285,9 @@ body{
 
 
 
-<div class="admin-content">
+
+
+
 
 
 
@@ -959,6 +1398,14 @@ body{
 
 
 
+
+
+
+
+
+
+
+
 <!--Main End-->
 </div>
 
@@ -995,6 +1442,34 @@ const addProductSection = document.getElementById("addProductSection");
 const productsSection = document.getElementById("productsSection");
 const categoryBtn = document.getElementById("categoryBtn");
 const categorySection = document.getElementById("categorySection");
+const usersBtn = document.getElementById("usersBtn");
+const usersSection = document.getElementById("usersSection");
+const ordersBtn = document.getElementById("ordersBtn");
+const ordersSection = document.getElementById("ordersSection");
+
+ordersBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+    hideAllSections();        // Hide other sections
+    removeActive();           // Remove active class
+    this.classList.add("active");
+    ordersSection.style.display = "block";
+    document.getElementById("sidebar").classList.toggle("active");
+
+    await loadOrders(1);      // Load first page of orders
+});
+
+usersBtn.addEventListener("click", async function(e){
+    e.preventDefault();
+     hideAllSections();      // hide other sections
+    removeActive();          // remove active class from sidebar links
+    this.classList.add("active");
+    usersSection.style.display = "block";
+    document.getElementById("sidebar").classList.toggle("active");
+
+    await loadUsers();       // fetch and render users
+});
+
+
 
 categoryBtn.addEventListener("click", function(e){
     e.preventDefault();
@@ -1011,6 +1486,8 @@ function hideAllSections(){
     addProductSection.style.display = "none";
     productsSection.style.display = "none";
      categorySection.style.display = "none"; 
+     usersSection.style.display = "none"; 
+     ordersSection.style.display = "none";
 }
 
 function removeActive(){
@@ -1445,6 +1922,206 @@ function renderGraph(data){
 
 // Load dashboard on page load
 window.addEventListener("DOMContentLoaded", loadDashboard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentUserPage = 1;
+const usersPerPage = 20;
+
+async function loadUsers(page = 1) {
+    currentUserPage = page;
+    try {
+        const res = await fetch(`/api/admin/users?page=${page}&limit=${usersPerPage}`);
+        const data = await res.json(); // { users: [...], totalUsers: 120 }
+
+        const tbody = document.querySelector("#usersTable tbody");
+        tbody.innerHTML = "";
+
+        data.users.forEach(user => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.provider}</td>
+                    <td>${new Date(user.createdAt).toLocaleString()}</td>
+                    <td>
+                        <button onclick="deleteUser('${user._id}')">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        renderUsersPagination(data.totalUsers);
+    } catch (err) {
+        console.error("Failed to load users:", err);
+    }
+}
+
+function renderUsersPagination(totalUsers) {
+    const totalPages = Math.ceil(totalUsers / usersPerPage);
+    const pagination = document.getElementById("usersPagination");
+    pagination.innerHTML = "";
+
+    for(let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.style.margin = "3px";
+        btn.style.padding = "6px 12px";
+        btn.style.background = (i === currentUserPage) ? "#0d47a1" : "#fff";
+        btn.style.color = (i === currentUserPage) ? "#fff" : "#0d47a1";
+        btn.style.border = "1px solid #0d47a1";
+        btn.style.borderRadius = "4px";
+        btn.onclick = () => loadUsers(i);
+        pagination.appendChild(btn);
+    }
+}
+
+async function deleteUser(userId){
+    if(!confirm("Delete this user?")) return;
+
+    await fetch(`/api/admin/delete-user/${userId}`, { method: "DELETE" });
+    loadUsers(currentUserPage);
+}
+
+// Show users section and load first page
+document.getElementById("usersBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    hideAllSections();
+    document.getElementById("usersSection").style.display = "block";
+    loadUsers(1);
+});
+
+
+
+
+
+
+
+
+let currentOrderPage = 1;
+const ordersPerPage = 10;
+
+/* ================= LOAD ORDERS ================= */
+async function loadOrders(page = 1) {
+    currentOrderPage = page;
+
+    try {
+        const res = await fetch(`/admin/api/orders?page=${page}&limit=${ordersPerPage}`);
+        const data = await res.json(); // { orders: [...], totalOrders: 50 }
+
+        const tbody = document.querySelector("#ordersTable tbody");
+        tbody.innerHTML = "";
+
+   data.orders.forEach(order => {
+    const deliveryStatus = order.delivery
+        .map(d => `${d.stage}: ${d.status ? '✅' : '❌'}`)
+        .join('<br>');
+
+    tbody.innerHTML += `
+        <tr>
+            <td>${order.customer?.name || order.customer}</td>
+            <td>${order.userEmail}</td>
+            <td>${order.product?.title || order.product}</td>
+            <td>${deliveryStatus}</td>
+            <td>${new Date(order.createdAt).toLocaleString()}</td>
+            <td>
+                <button onclick="openOrderModal('${order._id}')">Control</button>
+                <button onclick="deleteOrder('${order._id}')">Remove</button>
+            </td>
+        </tr>
+    `;
+});
+
+        renderOrdersPagination(data.totalOrders);
+    } catch(err) {
+        console.error("Failed to load orders:", err);
+    }
+}
+
+/* ================= PAGINATION ================= */
+function renderOrdersPagination(totalOrders) {
+    const totalPages = Math.ceil(totalOrders / ordersPerPage);
+    const pagination = document.getElementById("ordersPagination");
+    pagination.innerHTML = "";
+
+    for(let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.style.margin = "3px";
+        btn.style.padding = "6px 12px";
+        btn.style.background = (i === currentOrderPage) ? "#0d47a1" : "#fff";
+        btn.style.color = (i === currentOrderPage) ? "#fff" : "#0d47a1";
+        btn.style.border = "1px solid #0d47a1";
+        btn.style.borderRadius = "4px";
+        btn.onclick = () => loadOrders(i);
+        pagination.appendChild(btn);
+    }
+}
+
+/* ================= OPEN ORDER MODAL ================= */
+function openOrderModal(orderId) {
+    const modal = document.getElementById("orderModal");
+    const modalContent = document.getElementById("modalContent");
+    modal.style.display = "flex";
+    modalContent.innerHTML = "Loading...";
+
+    fetch(`/admin/api/order/${orderId}`)
+        .then(res => res.json())
+        .then(order => {
+            modalContent.innerHTML = order.delivery.map((d, index) => `
+                <label>
+                    <input type="checkbox" ${d.status ? 'checked' : ''} 
+                        onchange="updateDeliveryStatus('${orderId}', ${index}, this.checked)">
+                    ${d.stage}
+                </label><br>
+            `).join('');
+        })
+        .catch(err => {
+            modalContent.innerHTML = "Failed to load order.";
+            console.error(err);
+        });
+}
+
+function closeOrderModal() {
+    document.getElementById("orderModal").style.display = "none";
+}
+
+/* ================= UPDATE DELIVERY STATUS ================= */
+function updateDeliveryStatus(orderId, index, value) {
+    fetch(`/admin/api/order/${orderId}/update-delivery`, {
+        method: "PUT",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ index, status: value })
+    })
+    .then(() => loadOrders(currentOrderPage))
+    .catch(err => console.error(err));
+}
+
+/* ================= DELETE ORDER ================= */
+async function deleteOrder(orderId) {
+    if(!confirm("Remove this order?")) return;
+
+    try {
+        await fetch(`/admin/api/order/${orderId}`, { method: "DELETE" });
+        loadOrders(currentOrderPage);
+    } catch(err) {
+        console.error(err);
+    }
+}
 </script>
 
 </body>
