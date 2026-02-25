@@ -349,37 +349,53 @@ if(tokenFromUrl){
 }
 
 async function signup(){
+    const nameInput = document.getElementById("name");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
     const res = await fetch("/api/signup",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            name: name.value,
-            username: username.value,
-            email: email.value,
-            password: password.value
+            name: nameInput.value,
+            username: usernameInput.value,
+            email: emailInput.value,
+            password: passwordInput.value
         })
     });
 
     const data = await res.json();
+
+    if(!res.ok){
+        alert(data.message || "Signup failed");
+        return;
+    }
+
     localStorage.setItem("token", data.token);
     window.location.href="/";
 }
 
 async function login(){
+    const emailInput = document.getElementById("loginEmail");
+    const passwordInput = document.getElementById("loginPassword");
+
     const res = await fetch("/api/login",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            email: loginEmail.value,
-            password: loginPassword.value
+            email: emailInput.value,
+            password: passwordInput.value
         })
     });
 
     const data = await res.json();
-      if (!res.ok) { // if status code is not 200
+
+    if (!res.ok) { // handle error status
         alert(data.message || "Invalid email or password");
-        return; // stop execution
+        return;
     }
+
     localStorage.setItem("token", data.token);
     window.location.href="/";
 }
